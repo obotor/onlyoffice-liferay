@@ -26,13 +26,15 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileShortcut;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactory;
+import com.onlyoffice.liferay.docs.constants.PortletKeys;
 import com.onlyoffice.liferay.docs.utils.EditorLockManager;
 import com.onlyoffice.manager.document.DocumentManager;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Component(
         immediate = true,

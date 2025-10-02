@@ -9,6 +9,7 @@ Import-Package: \
     !org.slf4j.impl,\
     !org.glassfish.hk2.osgiresourcelocator,\
     !com.liferay.portal.kernel.resource.bundle,\
+    !javax.xml.bind.annotation.*,\
     *
 
 -consumer-policy: ${replacestring;${range;[==,==]};.*,(.*)];$1}

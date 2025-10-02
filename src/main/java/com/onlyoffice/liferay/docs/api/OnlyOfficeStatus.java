@@ -20,20 +20,23 @@ package com.onlyoffice.liferay.docs.api;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import org.osgi.service.component.annotations.Component;
 
 import java.io.IOException;
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import org.osgi.service.component.annotations.Component;
+
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Component(
         immediate = true,
         property = {
                 "osgi.http.whiteboard.context.path=/",
-                "osgi.http.whiteboard.servlet.pattern=/onlyoffice/status/*"
+                "osgi.http.whiteboard.servlet.pattern=/onlyoffice/status/*",
+                "jakarta.portlet.version=4.0"
         },
         service = Servlet.class
 )

@@ -36,14 +36,16 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.onlyoffice.liferay.docs.utils.PermissionUtils;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 import java.util.ResourceBundle;
-import javax.portlet.MutableRenderParameters;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+import jakarta.portlet.MutableRenderParameters;
+import jakarta.portlet.PortletRequest;
+import jakarta.portlet.PortletResponse;
 
 @Component(
         immediate = true,

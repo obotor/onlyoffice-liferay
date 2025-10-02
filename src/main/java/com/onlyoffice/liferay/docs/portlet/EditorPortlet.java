@@ -45,14 +45,16 @@ import com.onlyoffice.model.documenteditor.Config;
 import com.onlyoffice.model.documenteditor.config.document.Type;
 import com.onlyoffice.model.documenteditor.config.editorconfig.Mode;
 import com.onlyoffice.service.documenteditor.config.ConfigService;
+
+import java.io.IOException;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.io.IOException;
-import javax.portlet.Portlet;
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import jakarta.portlet.Portlet;
+import jakarta.portlet.PortletException;
+import jakarta.portlet.RenderRequest;
+import jakarta.portlet.RenderResponse;
 
 
 @Component(
@@ -62,13 +64,13 @@ import javax.portlet.RenderResponse;
                 "com.liferay.portlet.display-category=category.hidden",
                 "com.liferay.portlet.header-portlet-css=/css/main.css",
                 "com.liferay.portlet.instanceable=true",
-                "javax.portlet.display-name=OnlyOffice Edit",
-                "javax.portlet.init-param.template-path=/",
-                "javax.portlet.init-param.view-template=/edit.jsp",
-                "javax.portlet.name=" + PortletKeys.EDITOR,
-                "javax.portlet.security-role-ref=power-user,user",
-                "javax.portlet.resource-bundle=content.Language",
-                "javax.portlet.version=3.0"
+                "jakarta.portlet.display-name=OnlyOffice Edit",
+                "jakarta.portlet.init-param.template-path=/",
+                "jakarta.portlet.init-param.view-template=/edit.jsp",
+                "jakarta.portlet.name=" + PortletKeys.EDITOR,
+                "jakarta.portlet.security-role-ref=power-user,user",
+                "jakarta.portlet.resource-bundle=content.Language",
+                "jakarta.portlet.version=4.0"
         },
         service = Portlet.class
 )
@@ -98,13 +100,13 @@ public class EditorPortlet extends AbstractDefaultPortlet {
         long fileEntryId = ParamUtil.getLong(renderRequest, "fileEntryId");
         String languageId = LanguageUtil.getLanguageId(renderRequest);
         String lang = LocaleUtil.fromLanguageId(languageId).toLanguageTag();
-
+        
         try {
             FileEntry fileEntry = dlAppService.getFileEntry(fileEntryId);
             FileVersion fileVersion = fileEntry.getLatestFileVersion();
             String fileName = fileVersion.getFileName();
             Folder folder = fileEntry.getFolder();
-
+            
             if (documentManager.getDocumentType(fileName) == null) {
                 throw new FileExtensionException.InvalidExtension(fileName);
             }
@@ -118,13 +120,13 @@ public class EditorPortlet extends AbstractDefaultPortlet {
             ) {
                 editorLockManager.lockInEditor(fileEntry, EditorLockManager.TIMEOUT_CONNECTING_EDITOR);
             }
-
+            
             Config config = configService.createConfig(
                     String.valueOf(fileVersion.getFileVersionId()),
                     Mode.EDIT,
                     Type.DESKTOP
             );
-
+            
             config.getEditorConfig().setLang(lang);
 
             String shardkey = config.getDocument().getKey();
@@ -134,16 +136,15 @@ public class EditorPortlet extends AbstractDefaultPortlet {
                     folder.getFolderId(),
                     ActionKeys.ADD_DOCUMENT
             );
-
+            
             renderRequest.setAttribute("config", objectMapper.writeValueAsString(config));
             renderRequest.setAttribute("title", title);
             renderRequest.setAttribute("canCreateDocument", canCreateDocument);
             renderRequest.setAttribute("documentServerApiUrl", urlManager.getDocumentServerApiUrl(shardkey));
-
+            
             super.doView(renderRequest, renderResponse);
         } catch (PortalException e) {
             log.error(e, e);
-
             SessionErrors.add(renderRequest, e.getClass());
             include("/error.jsp", renderRequest, renderResponse);
         }

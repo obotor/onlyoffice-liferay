@@ -38,23 +38,27 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.onlyoffice.manager.document.DocumentManager;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import java.io.File;
 import java.io.InputStream;
 import java.util.Locale;
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.MutableRenderParameters;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+import jakarta.portlet.ActionRequest;
+import jakarta.portlet.ActionResponse;
+import jakarta.portlet.MutableRenderParameters;
 
 
 @Component(
         immediate = true,
         property = {
-                "javax.portlet.name=" + DLPortletKeys.DOCUMENT_LIBRARY,
-                "javax.portlet.name=" + DLPortletKeys.DOCUMENT_LIBRARY_ADMIN,
-                "mvc.command.name=/document_library/create_onlyoffice"
+                "jakarta.portlet.name=" + DLPortletKeys.DOCUMENT_LIBRARY,
+                "jakarta.portlet.name=" + DLPortletKeys.DOCUMENT_LIBRARY_ADMIN,
+                "mvc.command.name=/document_library/create_onlyoffice",
+                "jakarta.portlet.version=4.0"
+                
         },
         service = MVCActionCommand.class
 )

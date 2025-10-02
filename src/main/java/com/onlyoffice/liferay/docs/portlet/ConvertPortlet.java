@@ -34,14 +34,16 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.onlyoffice.liferay.docs.constants.PortletKeys;
 import com.onlyoffice.liferay.docs.utils.PermissionUtils;
 import com.onlyoffice.manager.document.DocumentManager;
+
+import java.io.IOException;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.io.IOException;
-import javax.portlet.Portlet;
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import jakarta.portlet.Portlet;
+import jakarta.portlet.PortletException;
+import jakarta.portlet.RenderRequest;
+import jakarta.portlet.RenderResponse;
 
 @Component(
         immediate = true,
@@ -50,12 +52,12 @@ import javax.portlet.RenderResponse;
                 "com.liferay.portlet.display-category=category.hidden",
                 "com.liferay.portlet.header-portlet-css=/css/main.css",
                 "com.liferay.portlet.instanceable=true",
-                "javax.portlet.init-param.template-path=/",
-                "javax.portlet.init-param.view-template=/convert.jsp",
-                "javax.portlet.name=" + PortletKeys.CONVERT,
-                "javax.portlet.security-role-ref=power-user,user",
-                "javax.portlet.resource-bundle=content.Language",
-                "javax.portlet.version=3.0"
+                "jakarta.portlet.init-param.template-path=/",
+                "jakarta.portlet.init-param.view-template=/convert.jsp",
+                "jakarta.portlet.name=" + PortletKeys.CONVERT,
+                "jakarta.portlet.security-role-ref=power-user,user",
+                "jakarta.portlet.resource-bundle=content.Language",
+                "jakarta.portlet.version=4.0"
         },
         service = Portlet.class
 )
@@ -73,7 +75,6 @@ public class ConvertPortlet extends AbstractDefaultPortlet {
     public void doView(final RenderRequest renderRequest, final RenderResponse renderResponse)
             throws IOException, PortletException {
         long fileEntryId = ParamUtil.getLong(renderRequest, "fileEntryId");
-
         try {
             FileEntry fileEntry = dlAppService.getFileEntry(fileEntryId);
             FileVersion fileVersion = fileEntry.getFileVersion();
@@ -104,7 +105,6 @@ public class ConvertPortlet extends AbstractDefaultPortlet {
             super.doView(renderRequest, renderResponse);
         } catch (PortalException e) {
             log.error(e, e);
-
             SessionErrors.add(renderRequest, e.getClass());
             include("/error.jsp", renderRequest, renderResponse);
         }

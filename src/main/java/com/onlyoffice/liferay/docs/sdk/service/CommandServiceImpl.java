@@ -21,6 +21,7 @@ package com.onlyoffice.liferay.docs.sdk.service;
 import com.onlyoffice.manager.request.RequestManager;
 import com.onlyoffice.service.command.CommandService;
 import com.onlyoffice.service.command.DefaultCommandService;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 

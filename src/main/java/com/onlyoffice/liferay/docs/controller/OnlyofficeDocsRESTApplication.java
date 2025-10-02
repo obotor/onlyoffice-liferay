@@ -18,14 +18,16 @@
 
 package com.onlyoffice.liferay.docs.controller;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import com.fasterxml.jackson.jakarta.rs.json.JacksonJsonProvider;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.ws.rs.core.Application;
+import jakarta.ws.rs.core.Application;
 
 @Component(
         property = {
@@ -59,7 +61,7 @@ public class OnlyofficeDocsRESTApplication extends Application {
 
                 return singletons;
         }
-
+        
         public Set<Class<?>> getClasses() {
                 Set<Class<?>> classes = new HashSet<>();
                 classes.add(JacksonJsonProvider.class); // Register the Jackson provider

@@ -28,10 +28,11 @@ import com.onlyoffice.liferay.docs.utils.EditorLockManager;
 import com.onlyoffice.manager.document.DefaultDocumentManager;
 import com.onlyoffice.manager.document.DocumentManager;
 import com.onlyoffice.manager.settings.SettingsManager;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import java.text.MessageFormat;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 @Component(
         service = DocumentManager.class

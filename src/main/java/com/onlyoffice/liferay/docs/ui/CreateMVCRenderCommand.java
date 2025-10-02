@@ -25,23 +25,24 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.constants.MVCRenderConstant
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.onlyoffice.liferay.docs.portlet.ResourceBundlePortletConfigWrapper;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.portlet.PortletConfig;
+import jakarta.portlet.PortletException;
+import jakarta.portlet.RenderRequest;
+import jakarta.portlet.RenderResponse;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Component(
         immediate = true,
         property = {
-                "javax.portlet.name=" + DLPortletKeys.DOCUMENT_LIBRARY,
-                "javax.portlet.name=" + DLPortletKeys.DOCUMENT_LIBRARY_ADMIN,
+                "jakarta.portlet.name=" + DLPortletKeys.DOCUMENT_LIBRARY,
+                "jakarta.portlet.name=" + DLPortletKeys.DOCUMENT_LIBRARY_ADMIN,
                 "mvc.command.name=/document_library/create_onlyoffice"
         },
         service = MVCRenderCommand.class
@@ -54,12 +55,11 @@ public class CreateMVCRenderCommand implements MVCRenderCommand {
     public String render(final RenderRequest renderRequest, final RenderResponse renderResponse)
             throws PortletException {
         RequestDispatcher requestDispatcher = this.servletContext.getRequestDispatcher("/create.jsp");
-
         LiferayPortletConfig portletConfig = (LiferayPortletConfig) renderRequest.getAttribute(
-                JavaConstants.JAVAX_PORTLET_CONFIG);
+                JavaConstants.JAKARTA_PORTLET_CONFIG);
 
         PortletConfig resourceBundlePortletConfigWrapper = new ResourceBundlePortletConfigWrapper(portletConfig);
-        renderRequest.setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, resourceBundlePortletConfigWrapper);
+        renderRequest.setAttribute(JavaConstants.JAKARTA_PORTLET_CONFIG, resourceBundlePortletConfigWrapper);
 
         try {
             HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);

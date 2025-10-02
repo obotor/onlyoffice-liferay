@@ -30,11 +30,13 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.onlyoffice.liferay.docs.model.EditingMeta;
-import lombok.SneakyThrows;
+
+import java.text.MessageFormat;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.text.MessageFormat;
+import lombok.SneakyThrows;
 
 
 @Component(service = EditorLockManager.class)

@@ -33,18 +33,21 @@ import com.onlyoffice.model.documenteditor.Config;
 import com.onlyoffice.model.documenteditor.config.document.Type;
 import com.onlyoffice.model.documenteditor.config.editorconfig.Mode;
 import com.onlyoffice.service.documenteditor.config.ConfigService;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 
 @Component(
-        property = "service.ranking:Integer=100",
+        
+		property = "service.ranking:Integer=100",
         service = DLPreviewRendererProvider.class
 )
 public class OnlyofficePreviewRendererProvider implements DLPreviewRendererProvider {
@@ -64,7 +67,7 @@ public class OnlyofficePreviewRendererProvider implements DLPreviewRendererProvi
     @Override
     public Set<String> getMimeTypes() {
         Set<String> mimeTypes = new HashSet<>();
-
+        
         for (Format format : documentManager.getFormats()) {
             if (format.getActions().contains("view")) {
                 mimeTypes.addAll(format.getMime());
@@ -76,7 +79,8 @@ public class OnlyofficePreviewRendererProvider implements DLPreviewRendererProvi
 
     @Override
     public DLPreviewRenderer getPreviewDLPreviewRenderer(final FileVersion fileVersion) {
-        if (!settingsManager.getSettingBoolean("preview", false)) {
+       
+    	if (!settingsManager.getSettingBoolean("preview", false)) {
             return null;
         }
 
@@ -100,11 +104,11 @@ public class OnlyofficePreviewRendererProvider implements DLPreviewRendererProvi
     @Override
     public DLPreviewRenderer getThumbnailDLPreviewRenderer(final FileVersion fileVersion) {
         // TODO Auto-generated method stub
-        return null;
+    	return null;
     }
 
     private Config getPreviewConfig(final FileVersion fileVersion, final Locale locale, final boolean version) {
-        String title = fileVersion.getFileName();
+    	String title = fileVersion.getFileName();
         if (version) {
             title = MessageFormat.format(
                     "{0} ({1} {2})",

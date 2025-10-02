@@ -27,15 +27,16 @@ import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.onlyoffice.manager.request.RequestManager;
-import org.apache.commons.io.IOUtils;
-import org.apache.hc.core5.http.HttpEntity;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.hc.core5.http.HttpEntity;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 
 @Component(service = FileEntryUtils.class)
