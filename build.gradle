@@ -1,0 +1,108 @@
+buildscript {
+    repositories {
+        maven { url "https://repository-cdn.liferay.com/nexus/content/groups/public/" }
+        maven { url "https://repository.liferay.com/nexus/content/groups/public/" }
+        mavenCentral()
+    }
+    dependencies {
+        //classpath 'com.liferay:com.liferay.ant.bnd:5.0.0'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'checkstyle'
+    //id 'biz.aQute.bnd' version '7.1.0'
+    //id 'com.liferay.plugin' version '8.0.0'
+    // id 'com.liferay.plugin' version '3.2.14' // Uncomment and adjust if you use a Liferay Gradle Plugin
+}
+
+group = 'com.onlyoffice'
+version = '3.0.1'
+
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+repositories {
+    maven {
+        url "https://repository-cdn.liferay.com/nexus/content/groups/public/"
+    }
+    maven {
+        url "https://repository.liferay.com/nexus/content/groups/public/"
+    }
+    mavenCentral()
+}
+
+ext {
+    liferayBomVersion = "2025.q1.17"
+}
+
+dependencies {
+    // Liferay BOM "platform" type dependencies
+    implementation enforcedPlatform("com.liferay.portal:release.dxp.bom:${liferayBomVersion}")
+    implementation enforcedPlatform("com.liferay.portal:release.dxp.bom.compile.only:${liferayBomVersion}")
+    implementation enforcedPlatform("com.liferay.portal:release.dxp.bom.third.party:${liferayBomVersion}")
+
+    // Provided scope (similar to Maven's "provided")
+    compileOnly 'com.liferay.portal:release.dxp.api'
+    compileOnly 'javax.portlet:portlet-api'
+    compileOnly 'javax.ws.rs:javax.ws.rs-api'
+    compileOnly 'org.osgi:osgi.cmpn'
+    compileOnly 'org.osgi:org.osgi.service.jaxrs'
+    compileOnly 'org.osgi:org.osgi.core'
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    compileOnly("org.projectlombok:lombok:1.18.36")
+
+    annotationProcessor("org.projectlombok:lombok:1.18.36")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.36")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
+
+    // Compile dependencies
+    implementation 'com.onlyoffice:docs-integration-sdk:1.3.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.1'
+    implementation 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.17.1'
+}
+
+checkstyle {
+    toolVersion = '10.3'
+    configFile = file('checkstyle.xml')
+    configProperties = [
+            'checkstyle.header.file': file('onlyoffice.header'), // adapt the actual file name and path
+            'checkstyle.suppressions.file': file('checkstyle-suppressions.xml')
+    ]
+    ignoreFailures = true //false                   // failsOnError=true
+    showViolations = true                    // logViolationsToConsole=true
+    // failOnViolation=true                     // default with ignoreFailures=false
+    // violationSeverity isn't directly supported, but use the config XML for severity
+    // consoleOutput: always true if showViolations=true, else disable with Gradle logging flags
+    // includeTestSourceDirectory=true          // requires custom source configuration (see below)
+
+}
+
+tasks.withType(Checkstyle) {
+    source 'src/main/java', 'src/test/java'
+    ignoreFailures = true //false
+    showViolations = true
+}
+
+jar {
+    manifest {
+        attributes(
+                'Manifest-Version': '1.0'
+                // Add more manifest entries if needed from your original pom configuration
+        )
+    }
+    exclude 'META-INF/resources/**/.sass-cache/'
+}
+
+processResources {
+    from('src/main/resources/META-INF/resources')
+}
+
+// Example deploy task placeholder (update for your actual deployment logic)
+//task deploy {
+//    doLast {
+//        println 'Deploy logic goes here...'
+//    }
+//}

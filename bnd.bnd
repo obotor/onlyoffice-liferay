@@ -1,6 +1,6 @@
 Bundle-Name: ONLYOFFICE Liferay Docs
 Bundle-SymbolicName: com.onlyoffice.liferay-docs
-Bundle-Version: 3.0.0
+Bundle-Version: 3.0.1
 
 Import-Package: \
     !jdk.net,\
@@ -22,6 +22,6 @@ Import-Package: \
 -provider-policy: ${replacestring;${range;[==,==]};.*,(.*)];$1}
 -sass: *
 
--includeresource: lib=target/lib/;lib:=true
+#-includeresource: lib=target/lib/;lib:=true
 
 -fixupmessages "Classes found in the wrong directory"; restrict:=error; is:=warning

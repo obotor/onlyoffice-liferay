@@ -6,3 +6,6 @@
 
 target/
 bundles/
+build/
+
+.DS_Store
