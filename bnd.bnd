@@ -24,4 +24,16 @@ Import-Package: \
 
 #-includeresource: lib=target/lib/;lib:=true
 
+-includeresource: \
+    @jackson-databind-*.jar,\
+    @jackson-jaxrs-json-provider-*.jar,\
+    @jackson-core-*.jar,\
+    @jackson-annotations-*.jar
+
+-exportcontents: \
+    com.fasterxml.jackson.databind.*,\
+    com.fasterxml.jackson.jaxrs.json.*
+
+Bundle-ClassPath: .,jackson-databind-2.17.1.jar,jackson-jaxrs-json-provider-2.17.1.jar
+
 -fixupmessages "Classes found in the wrong directory"; restrict:=error; is:=warning
