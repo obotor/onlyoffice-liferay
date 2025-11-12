@@ -4,6 +4,8 @@
 *.iml
 *.ipr
 
+.gradle
+
 target/
 bundles/
 build/
