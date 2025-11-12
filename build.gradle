@@ -12,9 +12,7 @@ buildscript {
 plugins {
     id 'java'
     id 'checkstyle'
-    //id 'biz.aQute.bnd' version '7.1.0'
-    //id 'com.liferay.plugin' version '8.0.0'
-    // id 'com.liferay.plugin' version '3.2.14' // Uncomment and adjust if you use a Liferay Gradle Plugin
+    //id 'com.liferay.plugin' version '8.0.0' // Uncomment and adjust if you use a Liferay Gradle Plugin
 }
 
 group = 'com.onlyoffice'
@@ -101,9 +99,3 @@ processResources {
     from('src/main/resources/META-INF/resources')
 }
 
-// Example deploy task placeholder (update for your actual deployment logic)
-//task deploy {
-//    doLast {
-//        println 'Deploy logic goes here...'
-//    }
-//}
