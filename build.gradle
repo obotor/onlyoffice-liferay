@@ -59,10 +59,10 @@ dependencies {
     testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
 
     // Compile dependencies
-    implementation 'com.onlyoffice:docs-integration-sdk:1.3.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.1'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.17.1'
-    implementation 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.17.1'
+    compileInclude 'com.onlyoffice:docs-integration-sdk:1.3.0'
+    compileInclude 'com.fasterxml.jackson.core:jackson-databind:2.17.1'
+    compileInclude 'com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.17.1'
+    compileInclude 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.17.1'
 }
 
 checkstyle {
@@ -96,20 +96,6 @@ jar {
     }
     exclude 'META-INF/resources/**/.sass-cache/'
 }
-
-task copyLibs(type: Copy) {
-    from {
-        configurations.runtimeClasspath.findAll {
-            it.name.startsWith('jackson-') ||
-                    it.name.startsWith('docs-integration-sdk') ||
-                    it.name.startsWith('java-jwt') ||
-                    it.name.startsWith('httpclient5') ||
-                    it.name.startsWith('httpcore5')
-        }
-    }
-    into "$buildDir/tmp/lib"
-}
-jar.dependsOn copyLibs
 
 processResources {
     from('src/main/resources/META-INF/resources')
